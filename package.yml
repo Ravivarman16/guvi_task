@@ -1,0 +1,75 @@
+---
+#updating the os:
+- name: updating the os
+  hosts: all
+  become: true
+  tasks:
+    - name: updating the os
+      shell: apt-get update
+
+    - name: updating the task work
+      debug:
+        msg: "os has been updated"
+
+#installing java on all nodes:
+- name: installing java
+  hosts: all
+  become: true
+  tasks:
+    - name: installing java
+      script: java.sh
+
+    - name: updating the task work
+      debug:
+        msg: "java has been installed on all nodes"
+
+#installing git 
+- name: installing git
+  hosts: git
+  become: true
+  tasks:
+    - name: installing git
+      script: git.sh
+
+    - name: updating the task work
+      debug:
+        msg: "git has been installed"
+
+
+#On jenkins master node:
+- name: To install jenkins on jenkins master
+  hosts: jenkins
+  become: true
+  tasks: 
+    - name: installing the packages on jenkins-master
+      script: jenkins.sh
+
+    - name: updating the task work
+      debug:
+        msg: "packages had been installed successfully on jenkins-master"
+
+#on test-server node:
+- name: To install docker on test-server
+  hosts: test
+  become: true
+  tasks: 
+    - name: installing the packages on test-server
+      script: docker.sh
+
+    - name: updating the task work
+      debug:
+        msg: "packages had been installed successfully on test-server"
+
+#on prod-server node:
+- name: To install docker
+  hosts: prod
+  become: true
+  tasks: 
+    - name: installing the packages on prod-server
+      script: docker.sh
+
+    - name: updating the task work
+      debug:
+        msg: "packages had been installed successfully on prod-server"
+
+#the end:
